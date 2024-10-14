@@ -77,4 +77,9 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  // Deletes all rows in the table. The number of affected rows is returned.
+  Future<int> deleteAll() async {
+    return await _db.delete(table);
+  }
 }

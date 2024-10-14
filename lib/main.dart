@@ -27,9 +27,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   // homepage layout
   @override
   Widget build(BuildContext context) {
@@ -59,6 +64,11 @@ class MyHomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: _delete,
               child: const Text('delete'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _deleteAll,
+              child: const Text('delete all'),
             ),
           ],
         ),
@@ -101,5 +111,10 @@ class MyHomePage extends StatelessWidget {
     final id = await dbHelper.queryRowCount();
     final rowsDeleted = await dbHelper.delete(id);
     debugPrint('deleted $rowsDeleted row(s): row $id');
+  }
+
+  void _deleteAll() async {
+    final rowsDeleted = await dbHelper.deleteAll();
+    debugPrint('deleted $rowsDeleted row(s)');
   }
 }
